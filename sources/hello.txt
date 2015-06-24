@@ -1,0 +1,90 @@
+.. _hello:
+
+**************
+Hello! Welcome
+**************
+
+Hello and welcome to the workshop on Finite Element simulation. In this workshop, we'll be working with a Linux machine and if this is new to you, this page should give you basic information on finding your way across. We will be logging on to Prof. Oliver Röhrle's bigger computer cluster **LEAD** to run our simulations. We'll be seeing shortly how to do that too. Your login and password information is also given and please group yourself into groups of 3-4 people. We have only 10 user logins.
+
+Basic navigation in Linux
+-------------------------
+
+Linux has graphical user interface (GUI) as well as a powerful **case sensitive** command-line terminal (like DOS in windows but much more powerful). Basic usage of the linux terminal is shown below:
+
+	+-----------------------+-------------------------------------+
+	|   Command             |             Explanation             |
+	+=======================+=====================================+
+	|  ls -l                |  List the contents of a directory   |
+	+-----------------------+-------------------------------------+
+	|  rm *file*            |  Delete *file*                      |
+	+-----------------------+-------------------------------------+
+	|  cp *file1* *file2*   |  Copies *file1* into *file2*        |
+	+-----------------------+-------------------------------------+
+	|  mv *file1* *file2*   |  Renames *file1* as *file2*         |
+	+-----------------------+-------------------------------------+
+	|  cd *path*            |  Change current directory to *path* |
+	+-----------------------+-------------------------------------+
+
+
+User Logins and LEAD Cluster
+----------------------------
+
+The following user accounts are available: 
+
+	+---------------------+-----------------------+
+	|     Login ID        |     Password          |
+	+=====================+=======================+
+	|  cbm_kurs01         |                       |
+	+---------------------+                       |
+	|  cbm_kurs02         |                       |
+	+---------------------+      2bMcQWiUS        |
+	|  ...                |                       |
+	+---------------------+                       |
+	|  cbm_kurs10         |                       |
+	+---------------------+-----------------------+
+
+
+The *cbm_kurs01* will be able to log into the cluster by typing
+::
+	
+	ssh -X cbm_kurs01@129.69.33.100
+
+other users can log-in similarly. Here, we have logged on to the **main node** of the cluster. **We are not allowed to do any simulations here!** We may use this node only to work with graphical applications like text editors, to visualize our simulation results, browse this HTML document in the browser and so on... Once logged in, we must borrow some software tools to do our work. We shall be using the editor :literal:`nedit` to edit word files. You can just type in :literal:`nedit myFile` to open the file 'myFile' in this editor. 
+
+
+**REMEMBER (don't do this yet)** that we will not be doing any simulation in this node. To perform simulations, we will be logging on to another node like this:
+
+.. code-block:: bash
+
+	ssh leadx03
+	module add lsdyna/7.0.0
+
+Log into this node only for the purposes of running your simulations. After the simulation completes, exit from this node by typing ``exit`` in the terminal.
+
+You have to copy the some files into your directory to begin with. Do the following:
+
+.. code-block:: bash
+	
+	cp -r kurs-ss2015/* ./
+	
+You will find the following folders in your directory:
+
+	+-----------------------+-------------------------------------+
+	|   Directory           |             Contents                |
+	+=======================+=====================================+
+	|  bin                  |  Executable files                   |
+	+-----------------------+-------------------------------------+
+	|  lsdyna_manuals       |  LS-DYNA manuals                    |
+	+-----------------------+-------------------------------------+
+	|  tutorial1            |  *Empty* directory for doing your   |
+	|                       |  first tutorial                     |
+	+-----------------------+-------------------------------------+
+	|  tutorial2            |  *Empty* directory for doing your   |
+	|                       |  second tutorial                    |
+	+-----------------------+-------------------------------------+
+	|  finalProject         |  Input file for the final project   |
+	+-----------------------+-------------------------------------+
+	|  html                 |  This documentation                 |
+	+-----------------------+-------------------------------------+
+
+We are now ready to begin with our tutorials. 

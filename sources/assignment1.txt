@@ -1,0 +1,31 @@
+.. _assignment1:
+
+*****************************
+Assignment1: Cube compression
+*****************************
+
+Using the same technique that you learned in the tutorial, do the following:
+
+
+#.	Change the boundary conditions on the lower face of the mesh. Try to fix all the
+	nodes on the lower boundary in all directions (x,y, and z) and see how this influences the 
+	result.
+
+
+#.	Change the problem to a dynamics problem by 
+	
+	*	changing the **\*parameter** card
+
+		+---------------+---------+
+		|Parameter Name |   Value |
+		+===============+=========+
+		|endT           |   100   |
+		+---------------+---------+
+		|dtout          |   10 	  |
+		+---------------+---------+
+		|dtmin          |   0.1   |
+		+---------------+---------+
+		|dtmax          |   10    |
+		+---------------+---------+
+	
+	*	changing the *imass* parameter in **\*control_implicit_dynamics** card to 1.

@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. Tutorial: Cantilever bending &mdash; MedizinTechnik_praktikum_2015 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="MedizinTechnik_praktikum_2015 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="6. Assignment2: Cantilever bending" href="assignment2.html"/>
+        <link rel="prev" title="4. Assignment1: Cube compression" href="assignment1.html"/> 
+
+  
+  <script src="static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> MedizinTechnik_praktikum_2015
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hello.html">1. Hello! Welcome</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hello.html#basic-navigation-in-linux">1.1. Basic navigation in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hello.html#user-logins-and-lead-cluster">1.2. User Logins and LEAD Cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Meshing tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial1.html">3. Tutorial: Cube compression</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial1.html#problem-statement">3.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial1.html#the-big-picture">3.2. The big picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial1.html#creating-the-ls-dyna-input-file">3.3. Creating the LS-DYNA input file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial1.html#geometry-mesh-creation">3.3.1. Geometry mesh creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial1.html#applying-the-boundary-conditions">3.3.2. Applying the boundary conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial1.html#applying-the-load-conditions">3.3.3. Applying the load conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial1.html#defining-the-material-data">3.3.4. Defining the material data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial1.html#ls-dyna-input-file">3.3.5. LS-DYNA input file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial1.html#post-processing-with-ls-prepost">3.4. Post-processing with LS-PrePost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial1.html#solution-file">3.5. Solution file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignment1.html">4. Assignment1: Cube compression</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">5. Tutorial: Cantilever bending</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#problem-statement">5.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-ls-dyna-input-file">5.2. Creating the LS-DYNA input file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-file">5.3. Solution file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignment2.html">6. Assignment2: Cantilever bending</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finalProject.html">7. Final project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finalProject.html#problem-statement">7.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finalProject.html#solution-file">7.2. Solution file</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">MedizinTechnik_praktikum_2015</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>5. Tutorial: Cantilever bending</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="sources/tutorial2.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="tutorial-cantilever-bending">
+<span id="tutorial2"></span><h1>5. Tutorial: Cantilever bending<a class="headerlink" href="#tutorial-cantilever-bending" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="problem-statement">
+<h2>5.1. Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will be focussing on a cantilever problem. A cantilever is a long, slender structure that is fixed on one end and free on the other (see the figure).
+Cantilevers normally undergo bending forces, which are critical especially when the cantilever is long.</p>
+<div class="figure align-right">
+<a class="reference internal image-reference" href="images/cantilever_bending.png"><img alt="images/cantilever_bending.png" src="images/cantilever_bending.png" style="width: 300px;" /></a>
+</div>
+<p>We&#8217;ll be constructing an elastic steel cantilever with dimensions <img class="math" src="images/math/99161b7b1c8f044f708a10941923306ae140695b.png" alt="100mm \times 10mm \times 1mm"/> [length, width and thickness]. A force of 10N will be applied in 4s at the free end of the cantilever in the negative Z-direction. We will be using shell elements to compute the displacement at the free end of the beam and the stresses induced in it. This will be a static bending-only problem.</p>
+</div>
+<div class="section" id="creating-the-ls-dyna-input-file">
+<h2>5.2. Creating the LS-DYNA input file<a class="headerlink" href="#creating-the-ls-dyna-input-file" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Create the geometry with the <code class="docutils literal"><span class="pre">--shell</span></code> option with <img class="math" src="images/math/45813aa5dc7828829a7fd77fde2e36afd84f664d.png" alt="10 \times 2"/> elements along the length and width</p>
+<div class="highlight-bash"><div class="highlight"><pre>createMesh --x <span class="m">100</span> --y <span class="m">10</span> --nx <span class="m">10</span> --ny <span class="m">2</span> --shell --geo cantilever_100_2.k
+</pre></div>
+</div>
+<p>The thickness of the geometry is provided in the <strong>*section_shell</strong> card we do not have to provide the z-thickness now.</p>
+</li>
+<li><p class="first">Create an LS-DYNA template file as in the previous tutorial and copy it to another file named &#8216;cantilever_bending.k&#8217;.</p>
+<div class="highlight-bash"><div class="highlight"><pre>setupDynaTemplate
+cp dynaTemplate.k cantilever_bending.k
+</pre></div>
+</div>
+</li>
+<li><p class="first">Edit the LS-Dyna input file &#8216;cantilever_bending.k&#8217; to provide the simulation parameters</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="63%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>endT</td>
+<td>4000</td>
+</tr>
+<tr class="row-odd"><td>dtout</td>
+<td>4000</td>
+</tr>
+<tr class="row-even"><td>dtmin</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>dtmax</td>
+<td>4000</td>
+</tr>
+</tbody>
+</table>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">Show parameter card</a><br /><div id="hiddencodeblock2" style="display: none"><div class="highlight-python"><div class="highlight"><pre>*PARAMETER
+$#    name       val
+R     endT      4000
+R    dtout      4000
+R    dtmin        10
+R    dtmax      4000
+</pre></div>
+</div>
+</div></li>
+<li><p class="first">You will now have to provide the boundary conditions to the problem:</p>
+<ul>
+<li><p class="first">Open the created file in LS-PrePost <code class="docutils literal"><span class="pre">lspp42</span> <span class="pre">cantilever_100_2.k</span> <span class="pre">&amp;</span></code>.</p>
+</li>
+<li><p class="first">Orient the geometry in the top view (viewing into the Z-axis) by typing <code class="docutils literal"><span class="pre">top</span></code> in LS-PrePost&#8217;s command window.</p>
+</li>
+<li><p class="first">Choose the nodes on one edge of the cantilever beam and save them as <em>fixedNodes.g</em> with node set ID 1.</p>
+</li>
+<li><p class="first">Choose the nodes on the other edge and save them as <em>freeNodes.g</em> with node set ID 2.</p>
+</li>
+<li><p class="first">Run &#8216;reformat_nodes_prepost&#8217; on these two files to convert them into LS-Dyna format.</p>
+<div class="highlight-bash"><div class="highlight"><pre>reformat_nodes_prepost fixednodes.g <span class="m">1</span> fixednodes.k
+reformat_nodes_prepost freenodes.g  <span class="m">2</span> freenodes.k
+</pre></div>
+</div>
+</li>
+<li><p class="first">Apply the boundary conditions on the fixed nodes such that these nodes are fixed in all degrees of freedom (in all axes)</p>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">Show boundary conditions card</a><br /><div id="hiddencodeblock3" style="display: none"><div class="highlight-python"><div class="highlight"><pre>*BOUNDARY_SPC_SET
+$# Apply displacement boundary conditions on the fixed end
+$#    nsid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
+         1         0         1         1         1         1         1         1
+</pre></div>
+</div>
+</div></li>
+</ul>
+</li>
+<li><p class="first">The next step is the apply the load on the free nodes of the cantilever</p>
+<ul>
+<li><p class="first">For this, you will require the <strong>*load_node_set</strong> card.</p>
+</li>
+<li><p class="first">When using this card, the load is applied on each node in the node set. Our problem states that the <em>total</em> load applied on this edge is 10N (0.01kN). So, we have to divide the total load by the number of nodes.</p>
+</li>
+<li><p class="first">We have divided our width into 2 elements which means that there are 3 nodes along this edge. The load-per-node along this edge is then: <img class="math" src="images/math/fc544fd5fb2197335b8fa7fbf4640e6f03a6dcc3.png" alt="\frac{0.01}{3}"/> kN i.e., 3.33e-3 kN.</p>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">Show load card</a><br /><div id="hiddencodeblock4" style="display: none"><div class="highlight-python"><div class="highlight"><pre>*LOAD_NODE_SET
+$# Applying load on the edge nodes
+$#    nsid       dof      lcid
+         2         3         1
+*DEFINE_CURVE
+         1
+                   0                   0
+               &amp;endT            -3.33e-3
+</pre></div>
+</div>
+</div></li>
+</ul>
+</li>
+<li><p class="first">Apply elastic material property to the cantilever beam just as in the previous example.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="21%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Material</th>
+<th class="head">ID</th>
+<th class="head">Density</th>
+<th class="head">Elastic
+Modulus</th>
+<th class="head">Poisson
+Ratio</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Elastic</td>
+<td>1</td>
+<td>7.85e-6</td>
+<td>200.0</td>
+<td>0.3</td>
+</tr>
+</tbody>
+</table>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock5'))">Show material card</a><br /><div id="hiddencodeblock5" style="display: none"><div class="highlight-python"><div class="highlight"><pre>*MAT_ELASTIC
+$# This defines a rather simple elastic material based on Hooke&#39;s law.
+$#     mid        ro         e        pr        da        db         k
+         1   7.85e-6      200.       0.3
+</pre></div>
+</div>
+</div></li>
+<li><p class="first">Log into a compute node and run the analysis</p>
+<div class="highlight-bash"><div class="highlight"><pre>ssh leadx03
+module add lsdyna/7.0.0
+<span class="nb">cd </span>tutorial2
+lsdyna_d <span class="nv">i</span><span class="o">=</span>cantilever_bending.k
+<span class="nb">exit</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">View the resulting displacement and stresses in LS-PrePost.</p>
+<div class="highlight-bash"><div class="highlight"><pre>lspp42 d3plot
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="solution-file">
+<h2>5.3. Solution file<a class="headerlink" href="#solution-file" title="Permalink to this headline">¶</a></h2>
+<p>You may copy the solution file to test the example</p>
+<div class="highlight-bash"><div class="highlight"><pre>cp -r ~/kurs-ss2015/solutions/solution_cantilever_bending ~/solutions
+</pre></div>
+</div>
+<p>The folder &#8216;solution_cantilever_bending&#8217; containing this example has now been copied to the &#8216;solutions&#8217; folder in your home directory. You may now try out the example or tweak it for the assignment.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="assignment2.html" class="btn btn-neutral float-right" title="6. Assignment2: Cantilever bending" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="assignment1.html" class="btn btn-neutral" title="4. Assignment1: Cube compression" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Ellankavi Ramasamy.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="static/jquery.js"></script>
+      <script type="text/javascript" src="static/underscore.js"></script>
+      <script type="text/javascript" src="static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

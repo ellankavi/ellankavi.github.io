@@ -1,0 +1,43 @@
+.. _finalProject:
+
+*************
+Final project
+*************
+
+The final project is an interesting one that involves sawing the human femur with a rotating saw blade.
+
+You will be provided with:
+
+*	the geometry, 
+*	completed material model for femur and saw, and
+*	the input file for LS-DYNA with most of the simulation parameters filled-in. 
+
+Problem Statement
+-----------------
+
+A blade saw rotating at a speed of 18000 RPM (revolutions per minute) cuts the femur. It translates 50mm in 100ms in the negative Y-axis to cut through the femur.
+The femur is made up of *plastic-kinematic* material that breaks after a particular internal element [yield] stress limit is reached. The saw is considered to be a rigid body that does not undergo any deformation. It is considered to be made up of stainless steel material.
+
+In this project, most of the work is already done for you. You will only have to apply the boundary conditions:
+
+*	femur head and epicondyles constrained in all degrees of freedom (the *blue* regions in the image).
+*	saw *rotates* at 18000 RPM (revolutions per minute). NOTE that you will have to convert RPM to *radians-per-millisecond*.
+*	saw translates at a speed of 0.5mm/ms.
+*	the total duration of the simulation is 100ms (endT parameter).
+
+You should see something like this:
+
+.. figure:: images/boneCut.png
+	:width:	300px
+	:align:	center
+
+Solution file
+-------------
+
+You may copy the solution file to test the example
+
+.. code-block:: bash
+
+	cp -r ~/kurs-ss2015/solutions/final_project ~/solutions
+
+The folder 'final_project' containing this example has now been copied to the 'solutions' folder in your home directory. You may now try out the example or tweak it for the assignment.

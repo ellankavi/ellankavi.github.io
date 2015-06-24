@@ -1,0 +1,10 @@
+.. _assignment2:
+
+*******************************
+Assignment2: Cantilever bending
+*******************************
+
+#.	Repeat the tutorial problem using **solid** elements (meshed with the same number of elements).
+#.	Do you observe a change in the resulting displacements and stresses?
+#.	How many shell elements do you need to have converged displacement and stress results?
+#.	How many solid elements do you need to have converged displacement and stress results?

@@ -1,0 +1,297 @@
+.. _tutorial1:
+
+Tutorial: Cube compression
+==========================
+
+.. _icons:
+
+.. |lspp_mesh_icon| image:: images/view_mesh.png
+	:width: 20pt
+	:height: 20pt
+
+.. |lspp_post_icon| image:: images/post.png
+	:width: 20pt
+	:height: 20pt
+
+Problem Statement
+-----------------
+
+In this tutorial, we'll be creating an *elastic steel cube* of dimensions :math:`100mm \times 100mm \times 100mm` and *compressing* it (on one face). We shall be compressing it by *0.1mm in 0.1s*. In most FE software, it is our duty to decide upon a consistent unit system and stay with it. In our case, we'll be using *Kg-mm-ms-GPa-kN* as our unit system. 
+
+The big picture
+---------------
+
+In any FE analysis, one must do the following:
+
+*	Create the CAD geometry and mesh it 
+*	Impose boundary conditions on the mesh
+*	Apply external loads or displacements
+*	Provide material information of the various parts of the geometry
+
+Let's proceed as per the above steps...
+
+Creating the LS-DYNA input file
+-------------------------------
+
+Geometry mesh creation
+^^^^^^^^^^^^^^^^^^^^^^
+
+#.	Navigate into your 'tutorial1' directory
+	
+	.. code-block:: bash
+
+			cd tutorial1
+
+		
+#.	Use the python code below to create your geometry
+	
+	.. code-block:: bash
+
+		createMesh --x 100 --y 100 --z 100 --nx 5 --ny 5 --nz 5 --geo cube_100_100_100.k --solid
+
+	This will create a cube of dimensions 100 x 100 x 100 with 5 elements in each axis and with its one vertex at the origin :math:`<0,0,0>`. The name of the geometry file is 'cube_100_100_100.k'. By using the argument :literal:`--solid`, we are indicating that we would like to have a solid mesh.
+
+#.	Open this file in LS-PrePost to view the mesh
+	
+	.. code-block:: bash
+
+		lspp42 cube_100_100_100.k &
+
+	The '&' symbol allows us to use the terminal after launching LS-PrePost. 
+
+#.	The following key combinations help in panning, zooming and rotating the model:
+	
+	*	Pan:	Ctrl + middle mouse button (press and hold)
+	*	Zoom:	Ctrl + scroll mouse button
+	*	Rotate:	Ctrl + left mouse button
+
+		.. figure:: images/lspp1.png
+			:width:	300px
+			:align:	right
+
+#.	If the mesh elements are not visible, click on |lspp_mesh_icon| icon in the bottom panel of LS-PrePost.
+
+Applying the boundary conditions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here, we'll be constraining the bottom face of the cube in the Z-axis. This is our only boundary condition. The cube is free to expand in the XY direction. The corresponding steps are described below:
+
+#. 	Enable both text and icon view in LS-PrePost by clicking:
+
+	* 	**View** :math:`\rightarrow` **Toolbar** :math:`\rightarrow` **Text and Icon (right)**
+	* 	**View** :math:`\rightarrow` **Toolbar** :math:`\rightarrow` **Text and Icon (bottom)**
+
+#.	Orient your view such that the z-axis is pointing up. We will imagine the box (cube) resting on its :math:`Z=0` face and 
+	we'll be compressing it from the top face (:math:`Z=100`). To orient your view, you can either type in any of the commands *right*, *left*, *top*, *bottom*, *front*, *back*. If these commands do not orient the model in your desired view, do it manually.
+
+#.	Select all the nodes on the bottom surface of the mesh as follows (Right panel):
+
+	*	**EleTol** :math:`\rightarrow` **Ident**
+	*	Two windows pop up: *Identify* and *Sel. Nodes*
+	*	In the *Sel. Nodes* window, select the *Area* radio button.
+	* 	You can now draw a box around those nodes that you want to save.
+	*	When you've selected the nodes, click on **Save** :math:`\rightarrow` **To File** in the *Sel. Nodes* window.
+	*	Save the file as *bottomNodes.g* file.
+	*	Click on **Clear Node** in the *Identify* window to clear the current node selection. This makes sure that we don't accidentally add this set of nodes to any selection that we might make.
+
+Applying the load conditions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here, we'll be applying [user-defined] displacement of 0.1mm on the top nodes (:math:`Z=100`) of the mesh. As done in the previous step, we must first identify the top nodes of the cube. The corresponding steps are described below:
+
+#.	Similar to the steps in selecting nodes for applying boundary conditions, select the nodes on the top face (:math:`Z=100`) of the mesh and save them as *topNodes.g*.
+
+#.	LS-PrePost saves the *.g* file in a format that is not understood by LS-DYNA. For this purpose, we must re-format the *.g* file into the *.k* file format. This is done next.
+
+#.	Call the python script :literal:`reformat_nodes_prepost` to reformat the saved nodes in LS-DYNA format
+	
+	.. code-block:: bash
+
+		reformat_nodes_prepost bottomNodes.g 1 bottom_nodes.k
+		reformat_nodes_prepost topNodes.g    2 top_nodes.k
+
+	You can view the help for this python script by typing :literal:`reformat_nodes_prepost --help`. Note that the bottom nodes are saved in *node set 1* and the top nodes in *node set 2.*
+
+
+.. _mat_elastic:
+
+
+Defining the material data
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Since the cube is an elastic material, we need to define one. Keep our unit system in mind. The elastic material information is tabulated below	
+
+	+---------+------+----------+------------+-----------+
+	|Material |  ID  |  Density |   Elastic  |  Poisson  |
+	|         |      |          |   Modulus  |  Ratio    |
+	+=========+======+==========+============+===========+
+	|Elastic  |  1   |  7.85e-6 |    200.0   |     0.3   |
+	+---------+------+----------+------------+-----------+
+
+The steps to include this information will be described in :ref:`ls_dyna_input_file`.
+
+.. _ls_dyna_input_file:
+
+LS-DYNA input file
+^^^^^^^^^^^^^^^^^^
+
+LS-DYNA requires an input file with our previously created geometry, boundary conditions, load conditions and the analysis parameters. We will create a skeleton file for LS-DYNA and then fill-in the information regarding the mesh, boundary conditions, load conditions and the simulation parameters. These steps are shown below.
+
+#.	Let us create an LS-DYNA template input file and modify it for the purposes of our problem. Run the command:
+
+	.. code-block:: bash
+
+		setupDynaTemplate
+
+	This will create a *dynaTemplate.k* LS-DYNA input file.
+
+#.	Let's copy this file to another file with the name 'cube_compression.k'. Do this in the terminal:
+	
+	.. code-block:: bash
+
+		cp dynaTemplate.k cube_compression.k
+
+#.	We will now have to fill-in the missing data in our *cube_compression.k* file.
+
+#.	Open the file in :literal:`sublime_text` editor (by typing :literal:`sublime_text cube_compression.k` in the command line).
+
+#.	Take a minute to read the 'README' inside the file.
+
+#.	We must fill-in the :literal:`??` with our problem-related parameters.
+
+#.	We will be editing the following keyword cards:
+	
+	*	\*PARAMETER
+	*	\*MAT_ELASTIC
+	*	\*MAT_RIGID
+	*	\*INCLUDE_PATH_RELATIVE
+	*	\*INCLUDE
+	*	\*SECTION_SOLID
+	*	\*SECTION_SHELL
+	*	\*PART
+	*	\*BOUNDARY_
+
+#.	PARAMETER CARD: 
+		For our problem, the input parameters are tabulated below
+
+		+---------------+---------------------------------------------+--------+
+		|Parameter Name |   Explanation                               |  Value |
+		+===============+=============================================+========+
+		|endT           | Duration of simulation                      |  100   |
+		+---------------+---------------------------------------------+--------+
+		|dtout          | Time interval between writing output states |  10    |
+		+---------------+---------------------------------------------+--------+
+		|dtmin          | Minimum timestep for implicit analysis      |  100   |
+		+---------------+---------------------------------------------+--------+
+		|dtmax          | Maximum timestep for implicit analysis      |  100   |
+		+---------------+---------------------------------------------+--------+
+
+#.	MATERIAL CARD: 
+		We'll not be using the **\*MAT_RIGID** card. So, comment it out. For the elastic material as defined in table :ref:`mat_elastic`, fill-in the **\*MAT_ELASTIC** card. The abbreviations in this card are:
+
+		+---------------+-------------------+
+		| Abbreviation  |   Name            |
+		+===============+===================+
+		| ro            |   Density         |
+		+---------------+-------------------+
+		| e             |   Elastic modulus |
+		+---------------+-------------------+
+		| pr            |   Poisson Ratio   |
+		+---------------+-------------------+
+
+#. 	INCLUDE CARD: 
+		We will be including three files (*cube_100_100_100.k, top_nodes.k, bottom_nodes.k*) into our model. Since the models are available in the current path, leave the **\*INCLUDE_PATH_RELATIVE** card as it is and add the above *.k* files one file per line in the **\*INCLUDE** card.
+	
+#.	SECTION CARD:
+		Since our model is meshed with solid elements, we'll assign 1 for element formulation (*elform*\ ) in the **\*SECTION_SOLID** card and since it's our first section definition, let it have a section ID (*secid*\  ) of 1. We're not using the **\*SECTION_SHELL** card. Comment it out. For more details on element sections, consult the LS-DYNA manual. 
+	
+#.	PART CARD:
+		Next, edit the **\*PART** card. Our model consists of only one part -- steel box. Let's give it any name and assign the previously created material ID, section ID to it. Since it is also our first (and only) part, give it a part ID (*pid*\  ) of 1.
+	
+#.	BOUNDARY CARD:
+		Now, we have to impose the boundary conditions as defined in the problem statement i.e., one face of the box is being compressed while the other face lies on a surface and does not yield to compression. You will need the **\*BOUNDARY_PRESCRIBED_MOTION_SET** and **\*BOUNDARY_SPC_SET** cards. 
+
+		The compression will be prescribed as a displacement of the upper boundary nodes and constraint (in the Z-axis) of the lower boundary nodes. To know the precise formatting of this card and the parameters required, look up **\*boundary_prescribed_motion** in the LS-DYNA manual. Click on ``show solution`` below to view the lines.
+
+		.. hidden-code-block:: python
+			:starthidden: True
+			:label: show solution
+
+			*BOUNDARY_SPC_SET
+			$# Hold the nodes of the lower cube in the z-axis
+			$#    nsid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
+			         1                                       1
+			*BOUNDARY_PRESCRIBED_MOTION_SET
+			$# Prescribe displacement on the top nodes
+			$#  typeid       dof       vad      lcid
+			         2         3         2         1
+			*DEFINE_CURVE
+			$#    lcid
+			         1
+			$#                 x                   y
+			                   0                   0
+			               &endT                 0.1
+			*BOUNDARY_SPC_NODE
+			$#     nid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
+			         1                   1         1                   1         1         1
+		
+
+#.	The completed file should have these changes:
+
+
+	.. figure:: images/cube_boundary_condn.png
+		:width: 300px
+		:align: center
+
+	.. figure:: images/cube_material_defn.png
+		:width: 300px
+		:align: left
+
+	.. figure:: images/cube_geom_defn.png
+		:width: 300px
+		:align: right
+
+	.. raw:: html
+
+			<div style="clear: both;"></div>
+
+	
+
+#. 	The input file for LS-DYNA is now complete. Solve the problem now with LS-DYNA. To do so, log on to a compute node in LEAD and solve the problem as follows
+
+	.. code-block:: bash
+
+		ssh leadx03
+		module add lsdyna/7.0.0
+		cd tutorial1
+		lsdyna_d i=cube_compression.k
+
+	After termination, quit the compute node
+
+	.. code-block:: bash
+
+		exit
+
+
+Post-processing with LS-PrePost
+-------------------------------
+
+LS-PrePost as indicated by the name can do both pre-processing of the geometry as well as post-processing the results at the end of the simulation. To post-process (or simply to view) the results, click on **Post** |lspp_post_icon| in the right panel. This opens up a sub-panel to its left with new post-processing options. These are:
+
+#.	**FriComp** :math:`\rightarrow` **Stress** :math:`\rightarrow` **Von Mises stress** :math:`\rightarrow` **Done**
+#.	**FriRang** :math:`\rightarrow` **Static** :math:`\rightarrow` **Done**
+#.	Press the play button to view the animation. If you do not see the animation toolbar, enter :literal:`anim forward` in the command window.
+
+For our example here, the problem was a 'static' simulation. So, there isn't anything interesting going on in the animation. If, however, you are performing a dynamic analysis, this could be more interesting.
+
+
+Solution file
+-------------
+
+You may copy the solution file to test the example
+
+.. code-block:: bash
+
+	cp -r ~/kurs-ss2015/solutions/solution_cube_compression ~/solutions
+
+The folder 'solution_cube_compression' containing this example has now been copied to the 'solutions' folder in your home directory. You may now try out the example or tweak it for the assignment.

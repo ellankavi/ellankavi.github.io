@@ -1,0 +1,61 @@
+.. _tutorial:
+
+****************
+Meshing tutorial
+****************
+
+Roughly said, an FE software understands geometry as mesh elements and the connection between these elements. There are many tools that can convert a CAD model into an FE mesh. Each FE tool has its own mesh format. In this workshop, we'll be working with LS-DYNA. `LS-PrePost <http://www.lstc.com/lspp/>`_ is a freeware that can convert such a CAD model into mesh elements understandable by LS-DYNA. Since using LS-PrePost can be quite time-consuming for the purposed of our tutorial, we'll be using the scripting language `Python <https://www.python.org/>`_ to help us in the task of meshing our geometry.
+
+That said, our geometry will be simple [solid] cuboids and [shell] rectangles as shown below:
+
+	.. figure:: images/cuboid.png
+		:width: 300px
+		:align: left
+		
+
+	.. figure:: images/rectangle.png
+		:width: 300px
+		:align: left
+
+	.. raw:: html
+ 
+   		<div style="clear: both;"></div>
+
+
+The python code that generates the above two geometry is called as follows:
+
+.. code-block:: bash
+
+	createMesh --x <X> --y <Y> --z <Z> --nx <NX> --ny <NY> --nz <NZ> --geo <GEOMETRY_FILE.k> --[shell | solid]
+
+The variables inside **<>** must be replaced with your values. These are the meanings of the arguments that you find in the command line:
+
++--------------------+------------------------------------------------------+
+| Argument           |  Description                                         |
++====================+======================================================+
+| :literal:`--x`     |  Length of the geometry in the X-axis                |
++--------------------+------------------------------------------------------+
+| :literal:`--y`     |  Width of the geometry in the Y-axis                 |
++--------------------+------------------------------------------------------+
+| :literal:`--z`     |  Height of the geometry in the Z-axis                |
++--------------------+------------------------------------------------------+
+| :literal:`--nx`    |  Number of elements in the X-axis                    |
++--------------------+------------------------------------------------------+
+| :literal:`--ny`    |  Number of elements in the Y-axis                    |
++--------------------+------------------------------------------------------+
+| :literal:`--nz`    |  Number of elements in the Z-axis                    |
++--------------------+------------------------------------------------------+
+| :literal:`--geo`   |  Name of the geometry file.                          |
+|                    |  The file suffix (file extension) should be **'.k'** |
++--------------------+------------------------------------------------------+
+| :literal:`--shell` | Creates a surface mesh                               |
++--------------------+------------------------------------------------------+
+| :literal:`--solid` | Creates a solid mesh                                 |
++--------------------+------------------------------------------------------+
+
+
+There are some more arguments available in this python script. Check them out by typing:
+
+.. code-block:: bash
+
+	createMesh --help

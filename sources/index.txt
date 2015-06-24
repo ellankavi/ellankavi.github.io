@@ -1,0 +1,50 @@
+.. MedizinTechnik_praktikum_2015 documentation master file, created by
+   sphinx-quickstart on Tue May  5 17:54:58 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Finite Element Workshop
+=======================
+
+Contents:
+
+This Finite Element (FE) Workshop will focus on the following:
+
+*	Types of meshes - solid and surface meshes
+*	Importance of meshing
+*	Viewing (post-processing) the results
+
+Software used:
+
+*	LS-DYNA
+*	LS-PrePost
+*	Python
+
+We will use a simple cube and a cantilever to illustrate the significance of meshing in a finite element analysis.
+
+The cube-example will be worked out here and the students will have to apply the same 
+techniques to model the behaviour of a cantilever. 
+
+Towards the end, you'll be provided with an *almost* complete input file that you'll have to fill-in with small details
+in order to be able to run it in LS-DYNA. This will be the final project.
+
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
+   hello
+   tutorial
+   tutorial1
+   assignment1
+   tutorial2
+   assignment2
+   finalProject
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

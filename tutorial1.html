@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Tutorial: Cube compression &mdash; MedizinTechnik_praktikum_2015 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="MedizinTechnik_praktikum_2015 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="4. Assignment1: Cube compression" href="assignment1.html"/>
+        <link rel="prev" title="2. Meshing tutorial" href="tutorial.html"/> 
+
+  
+  <script src="static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> MedizinTechnik_praktikum_2015
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hello.html">1. Hello! Welcome</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hello.html#basic-navigation-in-linux">1.1. Basic navigation in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hello.html#user-logins-and-lead-cluster">1.2. User Logins and LEAD Cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Meshing tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">3. Tutorial: Cube compression</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#problem-statement">3.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-big-picture">3.2. The big picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-ls-dyna-input-file">3.3. Creating the LS-DYNA input file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-mesh-creation">3.3.1. Geometry mesh creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applying-the-boundary-conditions">3.3.2. Applying the boundary conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applying-the-load-conditions">3.3.3. Applying the load conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-the-material-data">3.3.4. Defining the material data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ls-dyna-input-file">3.3.5. LS-DYNA input file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#post-processing-with-ls-prepost">3.4. Post-processing with LS-PrePost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-file">3.5. Solution file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignment1.html">4. Assignment1: Cube compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial2.html">5. Tutorial: Cantilever bending</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial2.html#problem-statement">5.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial2.html#creating-the-ls-dyna-input-file">5.2. Creating the LS-DYNA input file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial2.html#solution-file">5.3. Solution file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignment2.html">6. Assignment2: Cantilever bending</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finalProject.html">7. Final project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finalProject.html#problem-statement">7.1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finalProject.html#solution-file">7.2. Solution file</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">MedizinTechnik_praktikum_2015</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>3. Tutorial: Cube compression</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="sources/tutorial1.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="tutorial-cube-compression">
+<span id="tutorial1"></span><h1>3. Tutorial: Cube compression<a class="headerlink" href="#tutorial-cube-compression" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="icons"></span><div class="section" id="problem-statement">
+<h2>3.1. Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we&#8217;ll be creating an <em>elastic steel cube</em> of dimensions <img class="math" src="images/math/33016f5225e2a3b6379404fc4ba31fd8ec570d07.png" alt="100mm \times 100mm \times 100mm"/> and <em>compressing</em> it (on one face). We shall be compressing it by <em>0.1mm in 0.1s</em>. In most FE software, it is our duty to decide upon a consistent unit system and stay with it. In our case, we&#8217;ll be using <em>Kg-mm-ms-GPa-kN</em> as our unit system.</p>
+</div>
+<div class="section" id="the-big-picture">
+<h2>3.2. The big picture<a class="headerlink" href="#the-big-picture" title="Permalink to this headline">¶</a></h2>
+<p>In any FE analysis, one must do the following:</p>
+<ul class="simple">
+<li>Create the CAD geometry and mesh it</li>
+<li>Impose boundary conditions on the mesh</li>
+<li>Apply external loads or displacements</li>
+<li>Provide material information of the various parts of the geometry</li>
+</ul>
+<p>Let&#8217;s proceed as per the above steps...</p>
+</div>
+<div class="section" id="creating-the-ls-dyna-input-file">
+<h2>3.3. Creating the LS-DYNA input file<a class="headerlink" href="#creating-the-ls-dyna-input-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="geometry-mesh-creation">
+<h3>3.3.1. Geometry mesh creation<a class="headerlink" href="#geometry-mesh-creation" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Navigate into your &#8216;tutorial1&#8217; directory</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd </span>tutorial1
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use the python code below to create your geometry</p>
+<div class="highlight-bash"><div class="highlight"><pre>createMesh --x <span class="m">100</span> --y <span class="m">100</span> --z <span class="m">100</span> --nx <span class="m">5</span> --ny <span class="m">5</span> --nz <span class="m">5</span> --geo cube_100_100_100.k --solid
+</pre></div>
+</div>
+<p>This will create a cube of dimensions 100 x 100 x 100 with 5 elements in each axis and with its one vertex at the origin <img class="math" src="images/math/a69394c25a9755290785792e232030959932f725.png" alt="&lt;0,0,0&gt;"/>. The name of the geometry file is &#8216;cube_100_100_100.k&#8217;. By using the argument <code class="docutils literal"><span class="pre">--solid</span></code>, we are indicating that we would like to have a solid mesh.</p>
+</li>
+<li><p class="first">Open this file in LS-PrePost to view the mesh</p>
+<div class="highlight-bash"><div class="highlight"><pre>lspp42 cube_100_100_100.k <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>The &#8216;&amp;&#8217; symbol allows us to use the terminal after launching LS-PrePost.</p>
+</li>
+<li><p class="first">The following key combinations help in panning, zooming and rotating the model:</p>
+<ul>
+<li><p class="first">Pan:    Ctrl + middle mouse button (press and hold)</p>
+</li>
+<li><p class="first">Zoom:   Ctrl + scroll mouse button</p>
+</li>
+<li><p class="first">Rotate: Ctrl + left mouse button</p>
+<div class="figure align-right">
+<a class="reference internal image-reference" href="images/lspp1.png"><img alt="images/lspp1.png" src="images/lspp1.png" style="width: 300px;" /></a>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">If the mesh elements are not visible, click on <a class="reference internal" href="images/view_mesh.png"><img alt="lspp_mesh_icon" src="images/view_mesh.png" style="width: 20pt; height: 20pt;" /></a> icon in the bottom panel of LS-PrePost.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="applying-the-boundary-conditions">
+<h3>3.3.2. Applying the boundary conditions<a class="headerlink" href="#applying-the-boundary-conditions" title="Permalink to this headline">¶</a></h3>
+<p>Here, we&#8217;ll be constraining the bottom face of the cube in the Z-axis. This is our only boundary condition. The cube is free to expand in the XY direction. The corresponding steps are described below:</p>
+<ol class="arabic simple">
+<li>Enable both text and icon view in LS-PrePost by clicking:<ul>
+<li><strong>View</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Toolbar</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Text and Icon (right)</strong></li>
+<li><strong>View</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Toolbar</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Text and Icon (bottom)</strong></li>
+</ul>
+</li>
+<li>Orient your view such that the z-axis is pointing up. We will imagine the box (cube) resting on its <img class="math" src="images/math/645e8e061e21bbdf122e8c910559eb1fa24221d1.png" alt="Z=0"/> face and
+we&#8217;ll be compressing it from the top face (<img class="math" src="images/math/27813ed14e9dc370d6a00be13b0d17aeb545d50b.png" alt="Z=100"/>). To orient your view, you can either type in any of the commands <em>right</em>, <em>left</em>, <em>top</em>, <em>bottom</em>, <em>front</em>, <em>back</em>. If these commands do not orient the model in your desired view, do it manually.</li>
+<li>Select all the nodes on the bottom surface of the mesh as follows (Right panel):<ul>
+<li><strong>EleTol</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Ident</strong></li>
+<li>Two windows pop up: <em>Identify</em> and <em>Sel. Nodes</em></li>
+<li>In the <em>Sel. Nodes</em> window, select the <em>Area</em> radio button.</li>
+<li>You can now draw a box around those nodes that you want to save.</li>
+<li>When you&#8217;ve selected the nodes, click on <strong>Save</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>To File</strong> in the <em>Sel. Nodes</em> window.</li>
+<li>Save the file as <em>bottomNodes.g</em> file.</li>
+<li>Click on <strong>Clear Node</strong> in the <em>Identify</em> window to clear the current node selection. This makes sure that we don&#8217;t accidentally add this set of nodes to any selection that we might make.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="applying-the-load-conditions">
+<h3>3.3.3. Applying the load conditions<a class="headerlink" href="#applying-the-load-conditions" title="Permalink to this headline">¶</a></h3>
+<p>Here, we&#8217;ll be applying [user-defined] displacement of 0.1mm on the top nodes (<img class="math" src="images/math/27813ed14e9dc370d6a00be13b0d17aeb545d50b.png" alt="Z=100"/>) of the mesh. As done in the previous step, we must first identify the top nodes of the cube. The corresponding steps are described below:</p>
+<ol class="arabic">
+<li><p class="first">Similar to the steps in selecting nodes for applying boundary conditions, select the nodes on the top face (<img class="math" src="images/math/27813ed14e9dc370d6a00be13b0d17aeb545d50b.png" alt="Z=100"/>) of the mesh and save them as <em>topNodes.g</em>.</p>
+</li>
+<li><p class="first">LS-PrePost saves the <em>.g</em> file in a format that is not understood by LS-DYNA. For this purpose, we must re-format the <em>.g</em> file into the <em>.k</em> file format. This is done next.</p>
+</li>
+<li><p class="first">Call the python script <code class="docutils literal"><span class="pre">reformat_nodes_prepost</span></code> to reformat the saved nodes in LS-DYNA format</p>
+<div class="highlight-bash"><div class="highlight"><pre>reformat_nodes_prepost bottomNodes.g <span class="m">1</span> bottom_nodes.k
+reformat_nodes_prepost topNodes.g    <span class="m">2</span> top_nodes.k
+</pre></div>
+</div>
+<p>You can view the help for this python script by typing <code class="docutils literal"><span class="pre">reformat_nodes_prepost</span> <span class="pre">--help</span></code>. Note that the bottom nodes are saved in <em>node set 1</em> and the top nodes in <em>node set 2.</em></p>
+</li>
+</ol>
+</div>
+<div class="section" id="defining-the-material-data">
+<span id="mat-elastic"></span><h3>3.3.4. Defining the material data<a class="headerlink" href="#defining-the-material-data" title="Permalink to this headline">¶</a></h3>
+<p>Since the cube is an elastic material, we need to define one. Keep our unit system in mind. The elastic material information is tabulated below</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="21%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Material</th>
+<th class="head">ID</th>
+<th class="head">Density</th>
+<th class="head">Elastic
+Modulus</th>
+<th class="head">Poisson
+Ratio</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Elastic</td>
+<td>1</td>
+<td>7.85e-6</td>
+<td>200.0</td>
+<td>0.3</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The steps to include this information will be described in <a class="reference internal" href="#ls-dyna-input-file"><span>LS-DYNA input file</span></a>.</p>
+</div>
+<div class="section" id="ls-dyna-input-file">
+<span id="id1"></span><h3>3.3.5. LS-DYNA input file<a class="headerlink" href="#ls-dyna-input-file" title="Permalink to this headline">¶</a></h3>
+<p>LS-DYNA requires an input file with our previously created geometry, boundary conditions, load conditions and the analysis parameters. We will create a skeleton file for LS-DYNA and then fill-in the information regarding the mesh, boundary conditions, load conditions and the simulation parameters. These steps are shown below.</p>
+<ol class="arabic">
+<li><p class="first">Let us create an LS-DYNA template input file and modify it for the purposes of our problem. Run the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>setupDynaTemplate
+</pre></div>
+</div>
+<p>This will create a <em>dynaTemplate.k</em> LS-DYNA input file.</p>
+</li>
+<li><p class="first">Let&#8217;s copy this file to another file with the name &#8216;cube_compression.k&#8217;. Do this in the terminal:</p>
+<div class="highlight-bash"><div class="highlight"><pre>cp dynaTemplate.k cube_compression.k
+</pre></div>
+</div>
+</li>
+<li><p class="first">We will now have to fill-in the missing data in our <em>cube_compression.k</em> file.</p>
+</li>
+<li><p class="first">Open the file in <code class="docutils literal"><span class="pre">sublime_text</span></code> editor (by typing <code class="docutils literal"><span class="pre">sublime_text</span> <span class="pre">cube_compression.k</span></code> in the command line).</p>
+</li>
+<li><p class="first">Take a minute to read the &#8216;README&#8217; inside the file.</p>
+</li>
+<li><p class="first">We must fill-in the <code class="docutils literal"><span class="pre">??</span></code> with our problem-related parameters.</p>
+</li>
+<li><p class="first">We will be editing the following keyword cards:</p>
+<ul class="simple">
+<li>*PARAMETER</li>
+<li>*MAT_ELASTIC</li>
+<li>*MAT_RIGID</li>
+<li>*INCLUDE_PATH_RELATIVE</li>
+<li>*INCLUDE</li>
+<li>*SECTION_SOLID</li>
+<li>*SECTION_SHELL</li>
+<li>*PART</li>
+<li>*BOUNDARY_</li>
+</ul>
+</li>
+<li><dl class="first docutils">
+<dt>PARAMETER CARD:</dt>
+<dd><p class="first">For our problem, the input parameters are tabulated below</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="22%" />
+<col width="66%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Explanation</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>endT</td>
+<td>Duration of simulation</td>
+<td>100</td>
+</tr>
+<tr class="row-odd"><td>dtout</td>
+<td>Time interval between writing output states</td>
+<td>10</td>
+</tr>
+<tr class="row-even"><td>dtmin</td>
+<td>Minimum timestep for implicit analysis</td>
+<td>100</td>
+</tr>
+<tr class="row-odd"><td>dtmax</td>
+<td>Maximum timestep for implicit analysis</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>MATERIAL CARD:</dt>
+<dd><p class="first">We&#8217;ll not be using the <strong>*MAT_RIGID</strong> card. So, comment it out. For the elastic material as defined in table <a class="reference internal" href="#mat-elastic"><span>Defining the material data</span></a>, fill-in the <strong>*MAT_ELASTIC</strong> card. The abbreviations in this card are:</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Abbreviation</th>
+<th class="head">Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ro</td>
+<td>Density</td>
+</tr>
+<tr class="row-odd"><td>e</td>
+<td>Elastic modulus</td>
+</tr>
+<tr class="row-even"><td>pr</td>
+<td>Poisson Ratio</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>INCLUDE CARD:</dt>
+<dd><p class="first last">We will be including three files (<em>cube_100_100_100.k, top_nodes.k, bottom_nodes.k</em>) into our model. Since the models are available in the current path, leave the <strong>*INCLUDE_PATH_RELATIVE</strong> card as it is and add the above <em>.k</em> files one file per line in the <strong>*INCLUDE</strong> card.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SECTION CARD:</dt>
+<dd><p class="first last">Since our model is meshed with solid elements, we&#8217;ll assign 1 for element formulation (<em>elform</em>) in the <strong>*SECTION_SOLID</strong> card and since it&#8217;s our first section definition, let it have a section ID (<em>secid</em> ) of 1. We&#8217;re not using the <strong>*SECTION_SHELL</strong> card. Comment it out. For more details on element sections, consult the LS-DYNA manual.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PART CARD:</dt>
+<dd><p class="first last">Next, edit the <strong>*PART</strong> card. Our model consists of only one part &#8211; steel box. Let&#8217;s give it any name and assign the previously created material ID, section ID to it. Since it is also our first (and only) part, give it a part ID (<em>pid</em> ) of 1.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>BOUNDARY CARD:</dt>
+<dd><p class="first">Now, we have to impose the boundary conditions as defined in the problem statement i.e., one face of the box is being compressed while the other face lies on a surface and does not yield to compression. You will need the <strong>*BOUNDARY_PRESCRIBED_MOTION_SET</strong> and <strong>*BOUNDARY_SPC_SET</strong> cards.</p>
+<p>The compression will be prescribed as a displacement of the upper boundary nodes and constraint (in the Z-axis) of the lower boundary nodes. To know the precise formatting of this card and the parameters required, look up <strong>*boundary_prescribed_motion</strong> in the LS-DYNA manual. Click on <code class="docutils literal"><span class="pre">show</span> <span class="pre">solution</span></code> below to view the lines.</p>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock1'))">show solution</a><br /><div id="hiddencodeblock1" style="display: none"><div class="last highlight-python"><div class="highlight"><pre>*BOUNDARY_SPC_SET
+$# Hold the nodes of the lower cube in the z-axis
+$#    nsid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
+         1                                       1
+*BOUNDARY_PRESCRIBED_MOTION_SET
+$# Prescribe displacement on the top nodes
+$#  typeid       dof       vad      lcid
+         2         3         2         1
+*DEFINE_CURVE
+$#    lcid
+         1
+$#                 x                   y
+                   0                   0
+               &amp;endT                 0.1
+*BOUNDARY_SPC_NODE
+$#     nid       cid      dofx      dofy      dofz     dofrx     dofry     dofrz
+         1                   1         1                   1         1         1
+</pre></div>
+</div>
+</div></dd>
+</dl>
+</li>
+<li><p class="first">The completed file should have these changes:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="images/cube_boundary_condn.png"><img alt="images/cube_boundary_condn.png" src="images/cube_boundary_condn.png" style="width: 300px;" /></a>
+</div>
+<div class="figure align-left">
+<a class="reference internal image-reference" href="images/cube_material_defn.png"><img alt="images/cube_material_defn.png" src="images/cube_material_defn.png" style="width: 300px;" /></a>
+</div>
+<div class="figure align-right">
+<a class="reference internal image-reference" href="images/cube_geom_defn.png"><img alt="images/cube_geom_defn.png" src="images/cube_geom_defn.png" style="width: 300px;" /></a>
+</div>
+<div style="clear: both;"></div></li>
+<li><p class="first">The input file for LS-DYNA is now complete. Solve the problem now with LS-DYNA. To do so, log on to a compute node in LEAD and solve the problem as follows</p>
+<div class="highlight-bash"><div class="highlight"><pre>ssh leadx03
+module add lsdyna/7.0.0
+<span class="nb">cd </span>tutorial1
+lsdyna_d <span class="nv">i</span><span class="o">=</span>cube_compression.k
+</pre></div>
+</div>
+<p>After termination, quit the compute node</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">exit</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="post-processing-with-ls-prepost">
+<h2>3.4. Post-processing with LS-PrePost<a class="headerlink" href="#post-processing-with-ls-prepost" title="Permalink to this headline">¶</a></h2>
+<p>LS-PrePost as indicated by the name can do both pre-processing of the geometry as well as post-processing the results at the end of the simulation. To post-process (or simply to view) the results, click on <strong>Post</strong> <a class="reference internal" href="images/post.png"><img alt="lspp_post_icon" src="images/post.png" style="width: 20pt; height: 20pt;" /></a> in the right panel. This opens up a sub-panel to its left with new post-processing options. These are:</p>
+<ol class="arabic simple">
+<li><strong>FriComp</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Stress</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Von Mises stress</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Done</strong></li>
+<li><strong>FriRang</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Static</strong> <img class="math" src="images/math/a9c4c6156d25f42923975ce449aadad9848ed7dc.png" alt="\rightarrow"/> <strong>Done</strong></li>
+<li>Press the play button to view the animation. If you do not see the animation toolbar, enter <code class="docutils literal"><span class="pre">anim</span> <span class="pre">forward</span></code> in the command window.</li>
+</ol>
+<p>For our example here, the problem was a &#8216;static&#8217; simulation. So, there isn&#8217;t anything interesting going on in the animation. If, however, you are performing a dynamic analysis, this could be more interesting.</p>
+</div>
+<div class="section" id="solution-file">
+<h2>3.5. Solution file<a class="headerlink" href="#solution-file" title="Permalink to this headline">¶</a></h2>
+<p>You may copy the solution file to test the example</p>
+<div class="highlight-bash"><div class="highlight"><pre>cp -r ~/kurs-ss2015/solutions/solution_cube_compression ~/solutions
+</pre></div>
+</div>
+<p>The folder &#8216;solution_cube_compression&#8217; containing this example has now been copied to the &#8216;solutions&#8217; folder in your home directory. You may now try out the example or tweak it for the assignment.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="assignment1.html" class="btn btn-neutral float-right" title="4. Assignment1: Cube compression" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="2. Meshing tutorial" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Ellankavi Ramasamy.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="static/jquery.js"></script>
+      <script type="text/javascript" src="static/underscore.js"></script>
+      <script type="text/javascript" src="static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
